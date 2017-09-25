@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>angularProject</title>
+    <link rel="stylesheet" href="lib/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/app.css"/>
+</head>
+<body>
+<!--导航-->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">AngularProject</a>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li class="active"><a href="#/"><i class="glyphicon glyphicon-home"></i>控制面板</a></li>
+                <li><a href="#/part"><i class="glyphicon glyphicon-user"></i>分馆信息管理</a></li>
+                <li><a href="#/reader"><i class="glyphicon glyphicon-th-list"></i>读者信息管理</a></li>
+                <li><a href="#/book"><i class="glyphicon glyphicon-bullhorn"></i>图书信息管理</a></li>
+                <li><a href="#/order"><i class="glyphicon glyphicon-th-large"></i>订单信息管理</a></li>
+            </ul>
+        </div>
+        <!-- ngView: -->
+        <div title="" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main ng-scope" ng-view>
+            <!--<div class="ng-scope">
+                <h2 class="page-header">控制面板</h2>
+            </div>-->
+        </div>
+    </div>
+</div>
+<script>
+
+</script>
+
+
+<script src="lib/js/jquery.min.js"></script>
+<script src="lib/js/angular.min.js"></script>
+<script src="lib/js/angular-route.min.js"></script>
+
+<script src="js/directive.js"></script>
+<script src="js/service.js"></script>
+<script src="js/controller.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
