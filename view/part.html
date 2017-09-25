@@ -3,12 +3,28 @@
         <h3>{{title}}</h3>
     </div>
 
+    <form class="form-inline">
+        <div class="form-group">
+            <label>请选择：</label>
+            <select class="form-control">
+                <option value="0">所有分馆</option>
+                <option ng-repeat="item in regionLists" value="item.name">{{item.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>关键词：</label>
+            <input class="form-control" type="text"/>
+        </div>
+        <button class="btn btn-primary">搜索</button>
+        <button class="btn btn-primary pull-right" type="button" ng-click="addPart();">新增分馆</button>
+    </form>
+
     <div ng-repeat="item in libraryLists" class="panel panel-info">
         <div class="panel-heading">
-            {{item.name}}
+            {{item.name}} <span class="text-primary pull-right">修改</span>
         </div>
         <div class="panel-body">
-            body
+            电话：<span class="text-primary">{{item.phone}}</span>
         </div>
         <div class="panel-footer">
             地址：<span class="text-primary">{{item.address}}</span>

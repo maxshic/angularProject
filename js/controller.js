@@ -10,30 +10,39 @@
 
         }])
 
-        .controller('partController' ,['$scope' , 'partService' ,function($scope ,partService){
+        .controller('partController' ,['$scope' , '$location' , 'partService' ,function($scope ,$location ,partService){
 
             $scope.title = '分馆';
-
             $scope.libraryLists = [];
+            $scope.regionLists = [];
 
             partService.lists().then(function(response){
                 console.log(response.data);
                 $scope.libraryLists = response.data;
             });
 
+            partService.region().then(function(response){
+                //console.log(response.data);
+                $scope.regionLists = response.data;
+            });
+
+            $scope.addPart = function(){
+                $location.path('/addPart');
+            };
+
         }])
 
         .controller('readerController' ,['$scope' , '$location' , 'readerService' ,function($scope , $location ,readerService){
 
             $scope.title = '读者';
-
             $scope.keyword = '';
-
             $scope.readerLists = [];
+            $scope.temp = [];
 
             readerService.lists().then(function(response){
                 //console.log(response.data);
                 $scope.readerLists = response.data;
+                $scope.temp = Array.from($scope.readerLists);
             });
 
             $scope.toAddReader = function(){
@@ -41,7 +50,11 @@
             };
 
             $scope.search = function(){
-                console.log('123');
+                console.log($scope.keyword);
+                $scope.temp = Array.from($scope.readerLists);
+                if($scope.keyword.length != 0){
+                    console.log('123');
+                }
             };
 
         }])
@@ -78,6 +91,12 @@
                     $scope.isInvalid = true;
                 }
             };
+
+        }])
+
+        .controller('addPartController' ,['$scope' ,function($scope){
+            $scope.title = '添加';
+
 
         }]);
 })();

@@ -34,6 +34,11 @@
                 .when('/addReader' ,{
                     templateUrl: 'view/addReader.html',
                     controller: 'addReaderController'
+                })
+
+                .when('/addPart' ,{
+                    templateUrl: 'view/addPart.html',
+                    controller: 'addPartController'
                 });
         }]);
 })();

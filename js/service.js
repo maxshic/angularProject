@@ -11,7 +11,11 @@
         .service('partService' ,['$http' ,function($http){
             this.lists = function(){
                 return $http.get('res/library.json');
-            }
+            };
+
+            this.region = function(){
+                return $http.get('res/region.json');
+            };
         }])
         .service('readerService' ,['$http' ,function($http){
             this.lists = function(){
