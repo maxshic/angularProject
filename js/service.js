@@ -10,7 +10,7 @@
         }])
         .service('partService' ,['$http' ,function($http){
             this.lists = function(){
-                return $http.get();
+                return $http.get('res/library.json');
             }
         }])
         .service('readerService' ,['$http' ,function($http){
