@@ -23,13 +23,13 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="item in temp">
-                <td>{{item.id}}</td>
-                <td>{{item.name}}</td>
+            <tr ng-repeat="item in readerLists">
+                <td>{{$index + 1}}</td>
+                <td>{{item.Name}}</td>
                 <td>{{item.CardId}}</td>
                 <td>{{item.Phone}}</td>
                 <td>{{item.Address}}</td>
-                <td><button class="btn btn-sm btn-danger">删除</button><button class="btn btn-sm btn-primary">编辑</button></td>
+                <td><!--<button class="btn btn-sm btn-danger">删除</button>--><button class="btn btn-sm btn-primary">编辑</button></td>
             </tr>
         </tbody>
     </table>

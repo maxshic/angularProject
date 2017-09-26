@@ -10,21 +10,40 @@
 
         }])
 
-        .controller('partController' ,['$scope' , '$location' , 'partService' ,function($scope ,$location ,partService){
+        .controller('partController' ,['$scope' , '$location' , 'partService' , '$http' ,function($scope ,$location ,partService ,$http){
 
             $scope.title = '分馆';
             $scope.libraryLists = [];
             $scope.regionLists = [];
+            $scope.itemId = '';
+            $scope.keyword = '';
 
             partService.lists().then(function(response){
                 console.log(response.data);
-                $scope.libraryLists = response.data;
+                $scope.libraryLists = response.data.Data;
             });
 
             partService.region().then(function(response){
-                //console.log(response.data);
-                $scope.regionLists = response.data;
+                console.log(response.data);
+                $scope.regionLists = response.data.Data;
+                $scope.regionLists.unshift({
+                    Id: '',
+                    Name: '所有区'
+                });
             });
+
+            $scope.changeId = function(id){
+                $scope.itemId = id;
+                //console.log($scope.itemId);
+            };
+
+            $scope.search = function(){
+                console.log($scope.itemId);
+                console.log($scope.keyword);
+                partService.lists({regionId:$scope.itemId,name:$scope.keyword}).then(function(response){
+                    $scope.libraryLists = response.data.Data;
+                });
+            };
 
             $scope.addPart = function(){
                 $location.path('/addPart');
@@ -39,10 +58,10 @@
             $scope.readerLists = [];
             $scope.temp = [];
 
-            readerService.lists().then(function(response){
-                //console.log(response.data);
-                $scope.readerLists = response.data;
-                $scope.temp = Array.from($scope.readerLists);
+            readerService.lists({}).then(function(response){
+                console.log(response.data);
+                $scope.readerLists = response.data.Data;
+                //$scope.temp = Array.from($scope.readerLists);
             });
 
             $scope.toAddReader = function(){
@@ -50,18 +69,20 @@
             };
 
             $scope.search = function(){
-                console.log($scope.keyword);
-                $scope.temp = Array.from($scope.readerLists);
-                if($scope.keyword.length != 0){
-                    console.log('123');
-                }
+                readerService.lists({keyword : $scope.keyword}).then(function(response){
+                    console.log(response.data);
+                    $scope.readerLists = response.data.Data;
+                    //$scope.temp = Array.from($scope.readerLists);
+                });
             };
+
 
         }])
 
         .controller('bookController' ,['$scope' , 'bookService' ,function($scope ,bookService){
 
             $scope.title = '图书';
+
 
         }])
 
@@ -71,7 +92,7 @@
 
         }])
 
-        .controller('addReaderController' ,['$scope' ,function($scope){
+        .controller('addReaderController' ,['$scope' , 'readerService' ,function($scope ,readerService){
 
             $scope.title = '添加';
 
@@ -79,18 +100,26 @@
                 name : '',
                 cardId :'',
                 phone : '',
-                address : ''
+                address : '',
+                libraryId: ''
             };
 
             $scope.isInvalid = false;
 
             $scope.upload = function(){
                 if($scope.frm.$valid){
+
+                    console.log($scope.reader);
+                    readerService.upload($scope.reader).then(function(response){
+                        console.log(response);
+                    });
                     console.log('success!');
                 }else{
                     $scope.isInvalid = true;
                 }
             };
+
+
 
         }])
 

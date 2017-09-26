@@ -16,7 +16,7 @@
 
             <div class="form-group">
                 <label>身份证号：</label>
-                <input class="form-control" ng-model="reader.cardId" type="text" name="readerCardId" required pattern="([0-9]){7,18}(x|X)?"/>
+                <input class="form-control" ng-model="reader.cardId" type="text" name="readerCardId" required pattern="([0-9]){15,18}(x|X)?"/>
                 <div ng-show="frm.readerCardId.$dirty || isInvalid">
                     <span class="text-danger" ng-show="frm.readerCardId.$error.required">身份证号不能为空</span>
                     <span class="text-warning" ng-show="frm.readerCardId.$error.pattern">身份证号格式不正确</span>
