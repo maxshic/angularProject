@@ -19,12 +19,12 @@
             $scope.keyword = '';
 
             partService.lists().then(function(response){
-                console.log(response.data);
+                //console.log(response.data);
                 $scope.libraryLists = response.data.Data;
             });
 
             partService.region().then(function(response){
-                console.log(response.data);
+                //console.log(response.data);
                 $scope.regionLists = response.data.Data;
                 $scope.regionLists.unshift({
                     Id: '',
@@ -38,8 +38,8 @@
             };
 
             $scope.search = function(){
-                console.log($scope.itemId);
-                console.log($scope.keyword);
+                //console.log($scope.itemId);
+                //console.log($scope.keyword);
                 partService.lists({regionId:$scope.itemId,name:$scope.keyword}).then(function(response){
                     $scope.libraryLists = response.data.Data;
                 });
@@ -47,6 +47,10 @@
 
             $scope.addPart = function(){
                 $location.path('/addPart');
+            };
+
+            $scope.edit = function(id){
+                $location.path();
             };
 
         }])
@@ -123,9 +127,74 @@
 
         }])
 
-        .controller('addPartController' ,['$scope' ,function($scope){
+        .controller('editReaderController' ,['$scope' , '$location' , 'readerService' , '$routeParams' ,function($scope , $location ,readerService ,$routeParams){
+            $scope.title = '修改';
+            $scope.items = JSON.parse($routeParams.editItem);
+            //console.log(JSON.parse($routeParams.editItem));
+
+            $scope.upload = function(){
+                readerService.edit($scope.items).then(function(response){
+                    //console.log(response);
+                    if(response.data.Code == 100){
+                        $location.path('/reader');
+                    }
+                });
+            };
+
+        }])
+
+        .controller('addPartController' ,['$scope' , 'partService' , '$location' ,function($scope ,partService ,$location){
             $scope.title = '添加';
+            $scope.regionLists = [];
+            $scope.regionId = '';
+            $scope.part = {
+                name: '',
+                address: '',
+                contactPhone: '',
+                regionId: '',
+                introduce: '',
+                longitude: '',
+                latitude: ''
+            };
+            $scope.isInvalid = false;
 
+            partService.region().then(function(response){
+                console.log(response);
+                $scope.regionLists = response.data.Data;
+            });
 
+            $scope.upload = function(){
+                if($scope.frm.$valid){
+                    console.log('success!');
+
+                    console.log($scope.part);
+
+                    partService.upload($scope.part).then(function(response){
+                        console.log(response);
+                        if(response.data.Code == 100){
+                            $location.path('/part');
+                        }
+                    });
+                }else{
+                    $scope.isInvalid = true;
+                }
+            };
+
+        }])
+
+        .controller('editPartController' ,['$scope' , '$location' , 'partService' , '$routeParams' ,function($scope, $location , partService ,$routeParams){
+            $scope.title = '修改';
+            $scope.items = JSON.parse($routeParams.editItem);
+            //console.log(JSON.parse($routeParams.editItem));
+
+            $scope.upload = function(){
+                //console.log('123');
+                partService.edit($scope.items).then(function(response){
+                    //console.log(response);
+                    if(response.data.Code == 100){
+                        $location.path('/part');
+                    }
+                });
+            };
         }]);
 })();

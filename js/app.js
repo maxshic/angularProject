@@ -39,6 +39,16 @@
                 .when('/addPart' ,{
                     templateUrl: 'view/addPart.html',
                     controller: 'addPartController'
+                })
+
+                .when('/editPart/:editItem' ,{
+                    templateUrl: 'view/editPart.html',
+                    controller: 'editPartController'
+                })
+
+                .when('/editReader/:editItem' ,{
+                    templateUrl: 'view/editReader.html',
+                    controller: 'editReaderController'
                 });
         }]);
 })();

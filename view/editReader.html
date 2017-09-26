@@ -1,0 +1,33 @@
+<div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+        <div class="page-header">
+            <h3>{{title}}</h3>
+        </div>
+
+        <form ng-submit="upload();">
+            <div class="form-group">
+                <label>读者姓名</label>
+                <input class="form-control" ng-model="items.Name" type="text"/>
+            </div>
+            
+            <div class="form-group">
+                <label>手机号码</label>
+                <input class="form-control" ng-model="items.Phone" type="text"/>
+            </div>
+
+            <div class="form-group">
+                <label>身份证号码</label>
+                <input class="form-control" ng-model="items.CardId" type="text"/>
+            </div>
+            
+            <div class="form-group">
+                <label>家庭住址</label>
+                <textarea class="form-control" cols="30" rows="2" ng-model="items.Address"></textarea>
+            </div>
+
+            <button class="btn btn-primary btn-block">保存</button>
+        </form>
+
+
+    </div>
+</div>

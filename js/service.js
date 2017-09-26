@@ -21,6 +21,22 @@
             this.region = function(){
                 return $http.get(ROOTURL + 'region/list');
             };
+
+            this.upload = function(data){
+                return $http({
+                    method: 'post',
+                    url: ROOTURL + 'library/create',
+                    params: data
+                });
+            };
+
+            this.edit = function(data){
+                return $http({
+                    method: 'post',
+                    url: ROOTURL + 'library/update',
+                    params: data
+                });
+            };
         }])
         .service('readerService' ,['$http' , 'ROOTURL' ,function($http ,ROOTURL){
 
@@ -41,6 +57,14 @@
                     transformRequest: function (data) {
                         return $.param(data);
                     }
+                });
+            };
+
+            this.edit = function(data){
+                return $http({
+                    method: 'post',
+                    url: ROOTURL + 'member/update',
+                    params: data
                 });
             };
         }])

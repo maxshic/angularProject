@@ -4,6 +4,61 @@
             <h3>{{title}}</h3>
         </div>
 
+        <form name="frm" novalidate ng-submit="upload();">
+            <div class="form-group">
+                <label>分馆名称</label>
+                <input class="form-control" name="partName" ng-model="part.name" type="text" required pattern="[\u4e00-\u9fa5]{0,}"/>
+                <div ng-show="frm.partName.$dirty || isInvalid">
+                    <span class="text-danger" ng-show="frm.partName.$error.required">名称不能为空</span>
+                    <span class="text-warning" ng-show="frm.partName.$error.pattern">分馆名称为汉字</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>联系电话</label>
+                <input class="form-control" name="partPhone" ng-model="part.contactPhone" type="text" required pattern="d{3}-\d{8}|\d{4}-\d{7}"/>
+                <div ng-show="frm.partPhone.$dirty || isInvalid">
+                    <span class="text-danger" ng-show="frm.partPhone.$error.required">联系电话不能为空</span>
+                    <span class="text-warning" ng-show="frm.partPhone.$error.pattern">联系电话格式为0511-4405222或021-87888822</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>行政区域</label>
+                <select class="form-control" name="partRegion" ng-model="part.regionId" required>
+                    <option value="" style="display: none;">请选择</option>
+                    <option ng-repeat="item in regionLists" value="{{item.Id}}">{{item.Name}}</option>
+                </select>
+                <div ng-show="frm.partRegion.$dirty || isInvalid">
+                    <span class="text-danger" ng-show="frm.partRegion.$error.required">请选择行政区域</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>所在地址</label>
+                <textarea class="form-control" name="partAddress" ng-model="part.address" cols="30" rows="3" required></textarea>
+                <div ng-show="frm.partAddress.$dirty || isInvalid">
+                    <span class="text-warning" ng-show="frm.partAddress.$error.required">所在地址不能为空</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>分馆简介</label>
+                <textarea class="form-control" name="partIntroduce" ng-model="part.introduce" cols="30" rows="5"></textarea>
+            </div>
+            <div class="form-group">
+                <label>所在经度</label>
+                <input class="form-control" name="partLong" ng-model="part.longitude" type="text" pattern="(-?\d+)(\.\d+)?"/>
+                <div ng-show="frm.partLong.$dirty">
+                    <span class="text-warning" ng-show="frm.partLong.$error.pattern">经度为浮点数表示</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>所在纬度</label>
+                <input class="form-control" name="partLati" ng-model="part.latitude" type="text" pattern="(-?\d+)(\.\d+)?"/>
+                <div ng-show="frm.partLati.$dirty">
+                    <span class="text-warning" ng-show="frm.partLati.$error.pattern">纬度为浮点数表示</span>
+                </div>
+            </div>
+
+            <button class="btn btn-primary btn-block">保存</button>
+        </form>
 
 
     </div>
