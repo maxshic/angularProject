@@ -208,6 +208,12 @@
                 $scope.authorLists = response.data.Data;
             });
 
+           /* $scope.loadAll = function(){
+                $('[data-toggle="popover"]').popover();
+            };*/
+
+
+
         }])
 
         .controller('addAuthorController' ,['$scope' , 'authorService' ,function($scope ,authorService){

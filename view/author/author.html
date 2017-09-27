@@ -20,10 +20,10 @@
         <tbody>
             <tr id="trAuthor" ng-repeat="item in authorLists">
                 <td>{{$index + 1}}</td>
-                <td><img class="header" ng-src="{{item.Header}}" width="50" data-action="zoom"/></td>
+                <td><img class="header" ng-src="{{item.Header}}" width="50" data-action="zoom" onload="$('[data-toggle=popover]').popover();"/></td>
                 <td>{{item.Name}}</td>
                 <td>{{item.Pinyin}}</td>
-                <td><button class="btn btn-sm btn-primary" title="{{item.Introduce}}">简介</button><a href="#/editAuthor/{{item.Id}}" class="btn btn-sm btn-warning">修改</a></td>
+                <td><button class="btn btn-sm btn-primary" data-container="body" title="{{item.Name}}" data-content="{{item.Introduce}}" data-toggle="popover" data-placement="left">简介</button><a href="#/editAuthor/{{item.Id}}" class="btn btn-sm btn-warning">修改</a></td>
             </tr>
         </tbody>
     </table>
