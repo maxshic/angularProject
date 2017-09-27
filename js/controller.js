@@ -196,5 +196,84 @@
                     }
                 });
             };
+        }])
+
+        .controller('authorController' ,['$scope' , 'authorService' ,function($scope ,authorService){
+
+            $scope.title = '作者';
+            $scope.authorLists = [];
+
+            authorService.lists().then(function(response){
+                //console.log(response);
+                $scope.authorLists = response.data.Data;
+            });
+
+        }])
+
+        .controller('addAuthorController' ,['$scope' , 'authorService' ,function($scope ,authorService){
+
+            $scope.title = '添加';
+            $scope.author = {
+                name: '',
+                introduce: ''
+            };
+
+            var reader = new FileReader();
+
+            $('#fileIpt').change(function(){
+                //console.log('123');
+                reader.readAsDataURL($('#fileIpt')[0].files[0]);
+                reader.onload = function(e){
+                    $('#fileImg').attr('src' , e.target.result);
+                };
+            });
+
+            $scope.upload = function(){
+                var formData = new FormData();
+                var file = document.querySelector('#fileIpt').files[0];
+                formData.append('header' ,file);
+                formData.append('name' ,$scope.author.name);
+                formData.append('introduce' ,$scope.author.introduce);
+                console.log(formData);
+                authorService.upload(formData).then(function(response){
+                    console.log(response);
+                });
+            };
+
+        }])
+
+        .controller('editAuthorController' ,['$scope' , '$location' , '$routeParams' , 'authorService' ,function($scope ,$location ,$routeParams ,authorService){
+
+            $scope.title = '修改';
+            $scope.author = {};
+            var reader = new FileReader();
+
+            $('#eFileIpt').change(function(){
+                reader.readAsDataURL($('#eFileIpt')[0].files[0]);
+                reader.onload = function(e){
+                    $('#eFileImg').attr('src' , e.target.result);
+                };
+            });
+
+            authorService.find({Id : $routeParams.itemId}).then(function(response){
+                console.log(response);
+                $scope.author = response.data.Data;
+            });
+
+            $scope.upload = function(){
+                var formData = new FormData();
+                formData.append('Id' ,$routeParams.itemId);
+                formData.append('name' ,$scope.author.Name);
+                formData.append('introduce' ,$scope.author.Introduce);
+                formData.append('header' ,document.querySelector('#eFileIpt').files[0]);
+
+                authorService.edit(formData).then(function(response){
+                    //console.log(response);
+                    if(response.data.Code == 100){
+                        $location.path('/author');
+                    }
+                });
+            };
+
         }]);
 })();

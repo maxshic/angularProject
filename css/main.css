@@ -1,0 +1,56 @@
+
+#trAuthor td{
+    vertical-align: middle;
+
+}
+.header{
+    cursor: pointer;
+}
+
+#file{
+    width: 150px;
+    height: 150px;
+    margin: 0px auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    position: relative;
+}
+#fileImg{
+    width: 138px;
+    height: 138px;
+    margin: 5px;
+    position: absolute;
+}
+
+#fileIpt{
+    position: absolute;
+    width: 138px;
+    height: 138px;
+    margin: 5px;
+    filter: alpha(opacity:0);
+    opacity: 0;
+    cursor: pointer;
+}
+#eFile{
+    width: 150px;
+    height: 150px;
+    margin: 0px auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    position: relative;
+}
+#eFileImg{
+    width: 138px;
+    height: 138px;
+    margin: 5px;
+    position: absolute;
+}
+#eFileIpt{
+    position: absolute;
+    width: 138px;
+    height: 138px;
+    margin: 5px;
+    filter: alpha(opacity:0);
+    opacity: 0;
+    cursor: pointer;
+}

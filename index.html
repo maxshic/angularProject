@@ -5,6 +5,8 @@
     <title>angularProject</title>
     <link rel="stylesheet" href="lib/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="css/app.css"/>
+    <link rel="stylesheet" href="css/main.css"/>
+
 </head>
 <body>
 <!--导航-->
@@ -22,11 +24,11 @@
                 <li class="active"><a href="#/"><i class="glyphicon glyphicon-home"></i>控制面板</a></li>
                 <li><a href="#/part"><i class="glyphicon glyphicon-user"></i>分馆信息管理</a></li>
                 <li><a href="#/reader"><i class="glyphicon glyphicon-th-list"></i>读者信息管理</a></li>
+                <li><a href="#/author"><i class="glyphicon glyphicon-phone"></i>作者信息管理</a></li>
                 <li><a href="#/book"><i class="glyphicon glyphicon-bullhorn"></i>图书信息管理</a></li>
                 <li><a href="#/order"><i class="glyphicon glyphicon-th-large"></i>订单信息管理</a></li>
             </ul>
         </div>
-        <!-- ngView: -->
         <div title="" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main ng-scope" ng-view>
             <!--<div class="ng-scope">
                 <h2 class="page-header">控制面板</h2>
@@ -42,6 +44,8 @@
 <script src="lib/js/jquery.min.js"></script>
 <script src="lib/js/angular.min.js"></script>
 <script src="lib/js/angular-route.min.js"></script>
+<script src="lib/js/zoom.js"></script>
+<script src="lib/js/ng-file-upload.min.js"></script>
 
 <script src="js/filter.js"></script>
 <script src="js/directive.js"></script>

@@ -1,0 +1,28 @@
+<div>
+    <div class="center-block" style="width: 460px;">
+        <div class="page-header">
+            <h3>{{title}}</h3>
+        </div>
+
+        <form name="frm" novalidate ng-submit="upload();">
+
+            <div id="file">
+                <img id="fileImg" src="img/BritneySpears.jpg" alt="" width="130" height="130"/>
+                <input id="fileIpt" name="header" file-model="file" type="file"/>
+            </div>
+            <span class="center-block text-info" style="margin-bottom: 10px;text-align: center;">点击图片选择头像</span>
+
+            <div class="form-group">
+                <label>姓名</label>
+                <input class="form-control" name="name" ng-model="author.name" type="text" required/>
+            </div>
+
+            <div class="form-group">
+                <label>简介</label>
+                <textarea class="form-control" name="introduce" ng-model="author.introduce" cols="30" rows="5"></textarea>
+            </div>
+
+            <button class="btn btn-block btn-primary">保存</button>
+        </form>
+    </div>
+</div>

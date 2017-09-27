@@ -77,5 +77,51 @@
             this.lists = function(){
                 return $http.get();
             }
+        }])
+        .service('authorService' ,['$http' , 'ROOTURL' ,function($http ,ROOTURL){
+            this.lists = function(){
+                return $http({
+                    method: 'get',
+                    url: ROOTURL + 'author/list'
+                });
+            };
+
+            this.upload = function(fd){
+                return $http({
+                    method: 'post',
+                    url: ROOTURL + 'author/create',
+                    data: fd,
+                    headers:{'Content-Type': undefined},
+                    transformRequest: angular.identity,
+                    uploadEventHandlers: {
+                        progress: function(e){
+                            console.log(e);
+                        }
+                    },
+                    eventHandlers: {
+                        progress: function(e){
+                            console.log(e);
+                        }
+                    }
+                });
+            };
+
+            this.find = function(itemId){
+                return $http({
+                    method: 'get',
+                    url: ROOTURL + 'author/single',
+                    params: itemId
+                });
+            };
+
+            this.edit = function(fd){
+                return $http({
+                    method: 'post',
+                    url: ROOTURL + 'author/update',
+                    data: fd,
+                    headers:{'Content-Type': undefined},
+                    transformRequest: angular.identity
+                });
+            };
         }]);
 })();
