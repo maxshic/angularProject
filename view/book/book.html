@@ -1,0 +1,97 @@
+<div>
+    <div class="page-header">
+        <h3>{{title}}</h3>
+    </div>
+
+    <div>
+        <form class="form-inline" style="margin-bottom: 20px;" ng-submit="search();">
+            <div class="form-group">
+                <label>图书类型</label>
+                <select class="form-control" ng-model="cate">
+                    <option value="" style="display: none;">请选择</option>
+                    <option ng-repeat="item in bookCates"  value="{{item.Id}}">{{item.Name}}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>出版社</label>
+                <input class="form-control" type="text" readonly style="cursor: pointer;background-color: #FFFFFF;" ng-model="keyPub" ng-click="showDia($event);" placeholder="点击选择出版社"/>
+            </div>
+            
+            <div class="form-group">
+                <label>关键字</label>
+                <input id="key" class="form-control" type="text" ng-model="keyword" placeholder="请输入书名/作者/ISBN"/>
+            </div>
+
+            <button class="btn btn-default" type="button" ng-click="clear();"><i class="glyphicon glyphicon-remove-circle"></i>清空</button>
+
+            <button class="btn btn-default"><i class="glyphicon glyphicon-search"></i>查询</button>
+
+
+            <a class="btn btn-primary pull-right" href="#"><i class="glyphicon glyphicon-plus"></i>新增图书信息</a>
+        </form>
+    </div>
+
+    <div class="popover bottom" id="popover" ng-show="isShow" style="width: 400px;max-width: 400px;min-height: 280px;">
+        <div class="arrow"></div>
+        <h3 class="popover-title">选择出版社 <button class="close" ng-click="isShow=false;" type="button" style="outline: none;"><span class="pull-right">&times;</span></button></h3>
+
+        <div class="popover-content">
+            <span class="itemPub" ng-repeat="item in publishers" style="display: inline-block;cursor: pointer;" ng-click="choosePub(item.Name,item.Id);">{{item.Name}}</span>
+        </div>
+    </div>
+
+
+    <div ng-show="showNull" style="text-align: center">暂无数据</div>
+
+
+    <div id="bookContainer">
+
+
+
+        <div ng-repeat="item in bookLists">
+            <div style="width: 270px;" ng-class="{true: 'panel panel-info',false: 'panel panel-danger'}[item.Number!=0]">
+                <div class="panel-heading" style="color: #333;cursor: pointer;">
+                    {{item.Book.Name}} <span class="text-danger pull-right" ng-show="item.Number==0">借完啦</span><span class="text-primary pull-right" ng-show="item.Number!=0">剩余:{{item.Number}}/{{item.Book.Amount}}</span>
+                </div>
+                <div class="panel-body">
+                    <div class="panelBody">
+                        <div class="cover1">
+                            封&nbsp;&nbsp;面：
+                        </div>
+                        <div class="cover2">
+                            <img alt="" width="80" ng-src="{{item.Book.Image}}" onload="$('[data-toggle=tooltip]').tooltip();"/>
+                        </div>
+                    </div>
+                    <div style="height: 20px;line-height: 20px;">
+                        <span style="display: inline-block;width: 70px;text-align: right;">作&nbsp;&nbsp;者：</span><span>{{item.Book.Author.Name}}</span>
+                    </div>
+                    <div style="height: 20px;line-height: 20px;">
+                        <span style="display: inline-block;width: 70px;text-align: right;">出&nbsp;版&nbsp;社：</span><span>{{item.Book.Publisher.Name}}</span>
+                    </div>
+                    <div style="height: 20px;line-height: 20px;">
+                        <span style="display: inline-block;width: 70px;">出版日期：</span><span>{{item.Book.PublishDate}}</span>
+                    </div>
+                    <div style="height: 20px;line-height: 20px;">
+                        <span style="display: inline-block;width: 70px;">所属类别：</span><span>{{item.Book.Category.Name}}</span>
+                    </div>
+
+
+
+                </div>
+                <div class="panel-footer">
+                    <div style="padding-left: 158px;">
+                        <span data-toggle="tooltip" title="编辑" data-placement="bottom">&nbsp;<i class="glyphicon glyphicon-edit"></i></span>
+                        <span data-toggle="tooltip" title="入库" data-placement="bottom">&nbsp;<i class="glyphicon glyphicon-plus-sign"></i></span>
+                        <span data-toggle="tooltip" title="下架" data-placement="bottom">&nbsp;<i class="glyphicon glyphicon-circle-arrow-down"></i></span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>

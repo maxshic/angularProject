@@ -54,3 +54,50 @@
     opacity: 0;
     cursor: pointer;
 }
+
+#popover{
+    display: block;
+    z-index: 5;
+}
+.popover-content>span{
+    color: #666;
+    padding: 4px 8px;
+}
+.popover-content>span:hover{
+    color: red;
+}
+#bookContainer{
+
+}
+#bookContainer>div{
+    display: inline-block;
+    width: 25%;
+    min-width: 350px;
+    margin-bottom: 20px;
+}
+#bookContainer>div>div{
+    margin: auto;
+}
+.panelBody{
+    height: 120px;
+    overflow: hidden;
+}
+.panelBody .cover1{
+    float: left;
+    width: 70px;
+    height: 20px;
+    text-align: right;
+}
+.panelBody .cover2{
+    float: left;
+    height: 120px;
+}
+.panel-body{
+    color: #666;
+    /*padding-left: 20px;*/
+}
+.panel-footer span{
+    cursor: pointer;
+}
+
+

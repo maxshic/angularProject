@@ -68,10 +68,30 @@
                 });
             };
         }])
-        .service('bookService' ,['$http' ,function($http){
-            this.lists = function(){
-                return $http.get();
-            }
+        .service('bookService' ,['$http' , 'ROOTURL' ,function($http ,ROOTURL){
+            this.cateLists = function(){
+                return $http.get(ROOTURL + 'category/list');
+            };
+
+            this.getPublisher = function(){
+                return $http.get(ROOTURL + 'publisher/list');
+            };
+
+            this.getBookLists = function(obj){
+                return $http({
+                    method: 'get',
+                    url: ROOTURL + 'book/list',
+                    params: obj
+                });
+            };
+
+            /*this.getBookSingle = function(obj){
+                return $http({
+                    method: 'get',
+                    url: ROOTURL + 'book/single',
+                    params: obj
+                });
+            };*/
         }])
         .service('orderService' ,['$http' ,function($http){
             this.lists = function(){

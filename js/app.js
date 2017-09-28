@@ -22,13 +22,18 @@
                 })
 
                 .when('/book' ,{
-                    templateUrl: 'view/book.html',
+                    templateUrl: 'view/book/book.html',
                     controller: 'bookController'
                 })
 
                 .when('/order' ,{
                     templateUrl: 'view/order.html',
                     controller: 'orderController'
+                })
+
+                .when('/addBook' ,{
+                    templateUrl: 'view/book/addBook.html',
+                    controller: 'addBookController'
                 })
 
                 .when('/addReader' ,{

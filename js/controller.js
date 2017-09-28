@@ -86,8 +86,107 @@
         .controller('bookController' ,['$scope' , 'bookService' ,function($scope ,bookService){
 
             $scope.title = '图书';
+            $scope.bookCates = [];
+            $scope.publishers = [];
+            $scope.bookLists = [];
+            $scope.isShow = false;
+            $scope.showNull = false;
+            $scope.keyPub = '';
+            $scope.pubId = '';
+            $scope.cate = '';
+            $scope.keyword = '';
+
+            bookService.cateLists().then(function(response){
+                console.log(response);
+                $scope.bookCates = response.data.Data;
+                $scope.bookCates.unshift({
+                    Id: '',
+                    Name: '全部'
+                });
+            });
+
+            $scope.showDia = function($event){
+                //console.log($($event.target).offset());
+                var x = $($event.target).offset().top;
+                //var y = $($event.target).offset().left;
+                //console.log($event.clientX);
+                //console.log($($event.target).offset().left);
+                var y = $($event.target).offset().left;
+                $scope.isShow = true;
+                $('#popover').css({
+                    //position: 'fixed',
+                    //display: 'block',
+                    left: y - 380 + 'px',//y - 390 + 'px',
+                    top: x -15 + 'px'
+                });
+
+                bookService.getPublisher().then(function(response){
+                    //console.log(response);
+                    $scope.publishers = response.data.Data;
+                });
+            };
+
+            bookService.getBookLists().then(function(response){
+                //console.log(response);
+                if(response.data.Code == 100){
+                    $scope.bookLists = response.data.Data;
+                }
+                if($scope.bookLists.length == 0){
+                    $scope.showNull = true;
+                }else{
+                    $scope.showNull = false;
+                }
+
+            });
+
+            $scope.choosePub = function(itemName ,itemId){
+                $scope.keyPub = itemName;
+                $scope.pubId = itemId;
+                $scope.isShow = false;
+                $('#key').focus();
+            };
+
+            $scope.clear = function(){
+                $scope.cate = '';
+                $scope.pubId = '';
+                $scope.keyword = '';
+                $scope.keyPub = '';
+
+                bookService.getBookLists().then(function(response){
+                    console.log(response);
+                    if(response.data.Code == 100){
+                        $scope.bookLists = response.data.Data;
+                    }
+                    if($scope.bookLists.length == 0){
+                        $scope.showNull = true;
+                    }else{
+                        $scope.showNull = false;
+                    }
+
+                });
+            };
+
+            $scope.search = function(){
+                //console.log('123');
+                bookService.getBookLists({categoryId:$scope.cate,publisherId:$scope.pubId,keyword:$scope.keyword}).then(function(response){
+                    console.log(response);
+                    if(response.data.Code == 100){
+                        $scope.bookLists = response.data.Data;
+                    }
+                    if($scope.bookLists.length == 0){
+                        $scope.showNull = true;
+                    }else{
+                        $scope.showNull = false;
+                    }
+
+                });
+            };
 
 
+        }])
+
+        .controller('addBookController' ,['$scope' , 'bookService' ,function($scope ,bookService){
+            $scope.title = '添加';
         }])
 
         .controller('orderController' ,['$scope' , 'orderService' ,function($scope ,orderService){
