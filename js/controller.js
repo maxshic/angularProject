@@ -185,8 +185,76 @@
 
         }])
 
-        .controller('addBookController' ,['$scope' , 'bookService' ,function($scope ,bookService){
+        .controller('addBookController' ,['$scope' , 'bookService' , 'authorService' , '$location' ,function($scope ,bookService ,authorService ,$location){
             $scope.title = '添加';
+            $scope.authorLists = [];
+            $scope.bookCates = [];
+            $scope.publishers = [];
+            $scope.isInvalid = false;
+            $scope.book = {
+                name: '',
+                authorId: '',
+                isbn: '',
+                publishDate: '',
+                categoryId: '',
+                publisherId: '',
+                introduce: '',
+                image: ''
+            };
+
+            var reader = new FileReader();
+
+            $('#bFileIpt').change(function(){
+                //console.log('123');
+                reader.readAsDataURL($('#bFileIpt')[0].files[0]);
+                reader.onload = function(e){
+                    $('#bFileImg').attr('src' , e.target.result);
+                };
+            });
+
+            authorService.lists().then(function(response){
+                $scope.authorLists = response.data.Data;
+                //console.log($scope.authorLists);
+            });
+
+            bookService.cateLists().then(function(response){
+                $scope.bookCates = response.data.Data;
+                //console.log(response.data.Data);
+            });
+
+            bookService.getPublisher().then(function(response){
+                $scope.publishers = response.data.Data;
+                console.log(response.data.Data);
+            });
+
+            $scope.upload = function(){
+                if($scope.frm.$valid){
+                    $scope.book.image = $('#bFileIpt')[0].files[0];
+                    var formData = new FormData();
+                    formData.append('name' ,$scope.book.name);
+                    formData.append('authorId' ,$scope.book.authorId);
+                    formData.append('isbn' ,$scope.book.isbn);
+                    formData.append('publishDate' ,$scope.book.publishDate);
+                    formData.append('categoryId' ,$scope.book.categoryId);
+                    formData.append('publisherId' ,$scope.book.publisherId);
+                    formData.append('introduce' ,$scope.book.introduce);
+                    formData.append('image' ,$scope.book.image);
+                    console.log($scope.book);
+                    bookService.upload(formData).then(function(response){
+                        //console.log(response);
+                        if(response.data.Code == 100){
+                            $location.path('/book');
+                        }
+                    });
+                }else{
+                    $scope.isInvalid = true;
+                }
+
+
+
+            };
+
+
         }])
 
         .controller('orderController' ,['$scope' , 'orderService' ,function($scope ,orderService){

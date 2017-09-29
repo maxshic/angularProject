@@ -55,6 +55,30 @@
     cursor: pointer;
 }
 
+#bFile{
+    width: 150px;
+    height: 150px;
+    margin: 0px auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    position: relative;
+}
+#bFileImg{
+    width: 138px;
+    height: 138px;
+    margin: 5px;
+    position: absolute;
+}
+#bFileIpt{
+    position: absolute;
+    width: 138px;
+    height: 138px;
+    margin: 5px;
+    filter: alpha(opacity:0);
+    opacity: 0;
+    cursor: pointer;
+}
+
 #popover{
     display: block;
     z-index: 5;

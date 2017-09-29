@@ -4,4 +4,80 @@
             <h3>{{title}}</h3>
         </div>
     </div>
+
+    <div style="width: 400px;margin: auto">
+        <form name="frm" novalidate ng-submit="upload();">
+
+            <div id="bFile">
+                <img id="bFileImg" src="img/BritneySpears.jpg" alt="" width="130" height="130"/>
+                <input id="bFileIpt" name="header" file-model="file" type="file"/>
+            </div>
+            <span class="center-block text-info" style="margin-bottom: 10px;text-align: center;">点击图片选择头像</span>
+
+            <div class="form-group">
+                <label>图书名称</label>
+                <input class="form-control" type="text" name="bookName" ng-model="book.name" required/>
+                <div ng-show="frm.bookName.$dirty || isInvalid">
+                    <span class="text-danger" ng-show="frm.bookName.$error.required">请输入图书名称</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>作者</label>
+                <select class="form-control" name="bookAuthor" ng-model="book.authorId" required>
+                    <option value="" style="display: none;">请选择</option>
+                    <option ng-repeat="item in authorLists" value="{{item.Id}}">{{item.Name}}</option>
+                </select>
+                <div ng-show="frm.bookAuthor.$dirty || isInvalid">
+                    <span class="text-danger" ng-show="frm.bookAuthor.$error.required">请选择作者</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>图书ISBN</label>
+                <input class="form-control" name="bookIsbn" type="text" ng-model="book.isbn" required pattern="\d{13}"/>
+                <div ng-show="frm.bookIsbn.$dirty || isInvalid">
+                    <span class="text-danger" ng-show="frm.bookIsbn.$error.required">请输入图书ISBN</span>
+                    <span class="text-warning" ng-show="frm.bookIsbn.$error.pattern">ISBN为13为数字</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>出版日期</label>
+                <input class="form-control" name="bookPubDate" type="text" ng-model="book.publishDate" required pattern="\d{4}-\d{1,2}-\d{1,2}"/>
+                <div ng-show="frm.bookPubDate.$dirty || isInvalid">
+                    <span class="text-danger" ng-show="frm.bookPubDate.$error.required">请输出版日期</span>
+                    <span class="text-warning" ng-show="frm.bookPubDate.$error.pattern">日期格式为yyyy-MM-dd</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>图书类别</label>
+                <select class="form-control" name="bookCate" ng-model="book.categoryId" required>
+                    <option value="" style="display: none;">请选择</option>
+                    <option ng-repeat="item in bookCates" value="{{item.Id}}">{{item.Name}}</option>
+                </select>
+                <div ng-show="frm.bookCate.$dirty || isInvalid">
+                    <span class="text-danger" ng-show="frm.bookCate.$error.required">请选择图书类别</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>出版社</label>
+                <select class="form-control" name="bookPub" ng-model="book.publisherId" required >
+                    <option value="" style="display: none;">请选择</option>
+                    <option ng-repeat="item in publishers" value="{{item.Id}}">{{item.Name}}</option>
+                </select>
+                <div ng-show="frm.bookPub.$dirty || isInvalid">
+                    <span class="text-danger" ng-show="frm.bookPub.$error.required">请选择出版社</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>简介</label>
+                <textarea class="form-control" name="" ng-model="book.introduce" cols="30" rows="3"></textarea>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-primary">保存</button>
+                <a href="#/book" class="btn btn-default">返回</a>
+            </div>
+
+
+        </form>
+    </div>
 </div>

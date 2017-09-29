@@ -92,6 +92,16 @@
                     params: obj
                 });
             };*/
+
+            this.upload = function(fd){
+                return $http({
+                    method: 'post',
+                    url: ROOTURL + 'book/create',
+                    data: fd,
+                    headers: {'Content-Type': undefined},
+                    transformRequest: angular.identity
+                });
+            };
         }])
         .service('orderService' ,['$http' ,function($http){
             this.lists = function(){
