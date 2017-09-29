@@ -123,5 +123,17 @@
 .panel-footer span{
     cursor: pointer;
 }
-
+.modal{
+    display: block;
+    background-color: rgba(0,0,0,0.3);
+}
+.fade{
+    opacity: 1;
+}
+.modal-dialog{
+    /*margin: 25% auto;*/
+    margin-top: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
 

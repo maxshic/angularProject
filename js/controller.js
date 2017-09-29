@@ -83,14 +83,17 @@
 
         }])
 
-        .controller('bookController' ,['$scope' , 'bookService' ,function($scope ,bookService){
+        .controller('bookController' ,['$scope' , 'bookService' , 'partService' ,function($scope ,bookService ,partService){
 
             $scope.title = '图书';
             $scope.bookCates = [];
             $scope.publishers = [];
             $scope.bookLists = [];
+            $scope.partLists = [];
+            $scope.importBook = {};
             $scope.isShow = false;
             $scope.showNull = false;
+            $scope.isShowModal = false;
             $scope.keyPub = '';
             $scope.pubId = '';
             $scope.cate = '';
@@ -127,7 +130,7 @@
             };
 
             bookService.getBookLists().then(function(response){
-                //console.log(response);
+                console.log(response);
                 if(response.data.Code == 100){
                     $scope.bookLists = response.data.Data;
                 }
@@ -181,6 +184,33 @@
 
                 });
             };
+
+            $scope.showModal = function(bookId){
+                $scope.isShowModal = true;
+                console.log(bookId);
+                bookService.getBookSingle({id:bookId}).then(function(response){
+                    console.log(response);
+                    $scope.importBook = response.data.Data;
+                });
+            };
+
+            $scope.dismissModal = function(){
+                $scope.isShowModal = false;
+            };
+
+            partService.lists().then(function(response){
+                console.log(response);
+                $scope.partLists = response.data.Data;
+            });
+
+            $('#importBookBtn').click(function(){
+                $('#diaForm').submit();
+            });
+
+            $scope.uploadModal = function(){
+                console.log('dia');
+            };
+
 
 
         }])

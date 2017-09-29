@@ -85,13 +85,13 @@
                 });
             };
 
-            /*this.getBookSingle = function(obj){
+            this.getBookSingle = function(obj){
                 return $http({
                     method: 'get',
                     url: ROOTURL + 'book/single',
                     params: obj
                 });
-            };*/
+            };
 
             this.upload = function(fd){
                 return $http({
