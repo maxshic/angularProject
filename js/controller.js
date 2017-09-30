@@ -83,7 +83,7 @@
 
         }])
 
-        .controller('bookController' ,['$scope' , 'bookService' , 'partService' ,function($scope ,bookService ,partService){
+        .controller('bookController' ,['$scope' , 'bookService' , 'partService' , '$location' ,function($scope ,bookService ,partService ,$location){
 
             $scope.title = '图书';
             $scope.bookCates = [];
@@ -91,6 +91,7 @@
             $scope.bookLists = [];
             $scope.partLists = [];
             $scope.importBook = {};
+            $scope.bookItem = {};
             $scope.isShow = false;
             $scope.showNull = false;
             $scope.isShowModal = false;
@@ -98,6 +99,8 @@
             $scope.pubId = '';
             $scope.cate = '';
             $scope.keyword = '';
+            $scope.bookCount = '';
+            $scope.bookLib = '';
 
             bookService.cateLists().then(function(response){
                 console.log(response);
@@ -203,12 +206,30 @@
                 $scope.partLists = response.data.Data;
             });
 
-            $('#importBookBtn').click(function(){
+            /*$('#importBookBtn').click(function(){
                 $('#diaForm').submit();
-            });
+            });*/
 
             $scope.uploadModal = function(){
                 console.log('dia');
+                $scope.bookItem = {
+                    bookId : $scope.importBook.Book.Id,
+                    count : $scope.bookCount,
+                    libraryId : $scope.bookLib
+                };
+
+                //console.log($scope.bookItem);
+
+                var formData = new FormData();
+                formData.append('bookId' ,$scope.bookItem.bookId);
+                formData.append('count' ,$scope.bookItem.count);
+                formData.append('libraryId' ,$scope.bookItem.libraryId);
+
+                bookService.putaway(formData).then(function(response){
+                    console.log(response);
+                    $location.path('/book');
+                });
+
             };
 
 
