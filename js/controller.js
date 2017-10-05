@@ -232,6 +232,10 @@
 
             };
 
+            $scope.toEditBook = function(id){
+                $location.path('/editBook/' + id);
+            };
+
 
 
         }])
@@ -304,6 +308,54 @@
 
 
             };
+
+
+        }])
+
+        .controller('editBookController' ,['$scope' , 'bookService' ,'$location' , '$routeParams' ,function($scope ,bookService ,$location ,$routeParams){
+
+            $scope.isbn = '';
+            $scope.name = '';
+            $scope.publishDate = '';
+            $scope.categoryId = '';
+            $scope.publisherId = '';
+            $scope.authorId = '';
+            $scope.introduce = '';
+            $scope.categoryLists = {};
+
+            bookService.getBookSingle({id:$routeParams.itemId}).then(function(response){
+                console.log(response);
+                var books = response.data.Data;
+                $scope.isbn = books.Book.ISBN;
+                $scope.name = books.Book.Name;
+                $scope.publishDate = books.Book.PublishDate;
+                $scope.categoryId = books.Book.Category.Id;
+                $scope.publisherId = books.Book.Publisher.Id;
+                $scope.authorId = books.Book.Author.Id;
+                $scope.introduce = books.Book.Introduce;
+
+
+            });
+
+            bookService.cateLists().then(function(response){
+                console.log(response);
+            });
+
+            $scope.upload = function(){
+                var formData = new FormData();
+                formData.append('id' ,$routeParams.itemId);
+                formData.append('isbn' ,$scope.isbn);
+                formData.append('name' ,$scope.name);
+                formData.append('publishDate' ,$scope.publishDate);
+                formData.append('categoryId' ,$scope.categoryId);
+                formData.append('publisherId' ,$scope.publisherId);
+                formData.append('authorId' ,$scope.authorId);
+                formData.append('introduce' ,$scope.introduce);
+                bookService.editBook(formData).then(function(response){
+                    console.log(response);
+                });
+            };
+
 
 
         }])

@@ -3,7 +3,7 @@
  */
 (function(){
     angular.module('app.service' ,[])
-        .constant('ROOTURL' ,'http://192.168.9.100/librarywebapi/')
+        .constant('ROOTURL' ,'http://101.200.58.3/librarywebapi/')
         .service('homeService' ,['$http' ,function($http){
             this.lists = function(){
                 return $http.get();
@@ -109,6 +109,16 @@
                     url: ROOTURL + 'book/putaway',
                     data: fd,
                     headers: {'Content-Type': undefined},
+                    transformRequest: angular.identity
+                });
+            };
+
+            this.editBook = function(fd){
+                return $http({
+                    method: 'post',
+                    url: ROOTURL + 'book/update',
+                    data: fd,
+                    headers:{'Content-Type': undefined},
                     transformRequest: angular.identity
                 });
             };

@@ -1,0 +1,56 @@
+<div>
+    ISBN:<input type="text" ng-model="isbn"><br>
+    name:<input type="text" ng-model="name"><br>
+    publishDate:<input type="text" ng-model="publishDate"><br>
+    categoryId:<input type="text" ng-model="categoryId"><br>
+    publisherId:<input type="text" ng-model="publisherId"><br>
+    authorId:<input type="text" ng-model="authorId"><br>
+    introduce:<input type="text" ng-model="introduce"><br>
+    <button ng-click="upload();">submit</button>
+
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+        <div class="page-header">
+            <h3>{{title}}</h3>
+        </div>
+
+        <form name="frm" novalidate>
+            <div class="form-group">
+                <label>ISBN</label>
+                <input class="form-control" ng-model="isbn" type="text" required>
+            </div>
+            <div class="form-group">
+                <label>图书名称</label>
+                <input class="form-control" ng-model="name" type="text" required>
+            </div>
+            <div class="form-group">
+                <label>出版日期</label>
+                <input class="form-control" ng-model="publishDate" type="text" required>
+            </div>
+            <div class="form-group">
+                <label>图书类别</label>
+                <select class="form-control" required>
+                    <option value="" style="display: none;">请选择</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>出版社</label>
+                <select class="form-control" required>
+                    <option value="" style="display: none;">请选择</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>作者</label>
+                <select class="form-control" required>
+                    <option value="" style="display: none;">请选择</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>简介</label>
+                <textarea class="form-control" id="" cols="30" rows="5"></textarea>
+            </div>
+
+        </form>
+    </div>
+
+
+</div>
