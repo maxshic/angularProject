@@ -1,19 +1,26 @@
 <div>
-    ISBN:<input type="text" ng-model="isbn"><br>
+    <!--ISBN:<input type="text" ng-model="isbn"><br>
     name:<input type="text" ng-model="name"><br>
     publishDate:<input type="text" ng-model="publishDate"><br>
     categoryId:<input type="text" ng-model="categoryId"><br>
     publisherId:<input type="text" ng-model="publisherId"><br>
     authorId:<input type="text" ng-model="authorId"><br>
     introduce:<input type="text" ng-model="introduce"><br>
-    <button ng-click="upload();">submit</button>
+    <button ng-click="upload();">submit</button>-->
 
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
         <div class="page-header">
             <h3>{{title}}</h3>
         </div>
 
-        <form name="frm" novalidate>
+        <form name="frm" novalidate ng-submit="upload();">
+
+            <div id="eFile">
+                <img id="eFileImg" ng-src="{{image}}" alt="" width="130" height="130"/>
+                <input id="eFileIpt" name="header" file-model="file" type="file"/>
+            </div>
+            <span class="center-block text-info" style="margin-bottom: 10px;text-align: center;">点击图片选择封面</span>
+
             <div class="form-group">
                 <label>ISBN</label>
                 <input class="form-control" ng-model="isbn" type="text" required>
@@ -28,25 +35,33 @@
             </div>
             <div class="form-group">
                 <label>图书类别</label>
-                <select class="form-control" required>
-                    <option value="" style="display: none;">请选择</option>
+                <select class="form-control" ng-model="categoryId" required>
+                    <option value=""  style="display: none;">请选择</option>
+                    <option value="{{item.Id}}" ng-repeat="item in categoryLists">{{item.Name}}</option>
                 </select>
             </div>
             <div class="form-group">
                 <label>出版社</label>
-                <select class="form-control" required>
+                <select class="form-control" ng-model="publisherId" required>
                     <option value="" style="display: none;">请选择</option>
+                    <option value="{{item.Id}}" ng-repeat="item in publisherLists">{{item.Name}}</option>
                 </select>
             </div>
             <div class="form-group">
                 <label>作者</label>
-                <select class="form-control" required>
+                <select class="form-control" ng-model="authorId" required>
                     <option value="" style="display: none;">请选择</option>
+                    <option value="{{item.Id}}" ng-repeat="item in authorLists">{{item.Name}}</option>
                 </select>
             </div>
             <div class="form-group">
                 <label>简介</label>
-                <textarea class="form-control" id="" cols="30" rows="5"></textarea>
+                <textarea class="form-control" ng-model="introduce" id="" cols="30" rows="5"></textarea>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-primary">保存</button>
+                <a href="#/book" class="btn btn-default">返回</a>
             </div>
 
         </form>

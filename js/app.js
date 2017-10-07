@@ -36,6 +36,11 @@
                     controller: 'addBookController'
                 })
 
+                .when('/bookInfo/:itemId' ,{
+                    templateUrl: 'view/book/bookInfo.html',
+                    controller: 'bookInfoController'
+                })
+
                 .when('/editBook/:itemId' ,{
                     templateUrl: 'view/book/editBook.html',
                     controller: 'editBookController'

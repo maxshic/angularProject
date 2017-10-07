@@ -1,0 +1,64 @@
+<div>
+    <div class="page-header">
+        <h3>{{title}}</h3>
+    </div>
+
+    <div class="panel panel-info" style="min-width: 900px;">
+        <div class="panel-heading">
+            <h4>《{{bookData.Book.Name}}》</h4>
+        </div>
+        <div class="panel-body">
+            <div style="display: flex;">
+                <div style="width: 300px;">
+                    <img ng-src="{{bookData.Book.Image}}" alt="" width="300">
+                </div>
+                <div id="bookInfo" style="width: 500px;">
+                    <div>
+                        <span>作者：</span>{{bookData.Book.Author.Name}}
+                    </div>
+                    <div>
+                        <span>类别：</span>{{bookData.Book.Category.Name}}
+                    </div>
+                    <div>
+                        <span>ISBN：</span>{{bookData.Book.ISBN}}
+                    </div>
+                    <div>
+                        <span>出版日期：</span>{{bookData.Book.PublishDate}}
+                    </div>
+                    <div>
+                        <span>出版社：</span>{{bookData.Book.Publisher.Name}}
+                    </div>
+                    <div>
+                        <span>状态：</span><div style="display: inline-block;" ng-show="bookData.Book.State==1">上架</div><div style="display: inline-block;" ng-show="bookData.Book.State!=1">下架</div>
+                    </div>
+                    <div>
+                        <span>简介：</span><div style="display: inline-block;">{{bookData.Book.Introduce}}</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="panel-footer">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>书号</th>
+                        <th>分馆</th>
+                        <th>状态</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in bookData.Detail">
+                        <td>{{$index + 1}}</td>
+                        <td>{{item.Number}}</td>
+                        <td>{{item.LibraryName}}</td>
+                        <td><span ng-show="item.State==1">可借</span><span ng-show="item.State!=1">已借</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>

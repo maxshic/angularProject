@@ -51,7 +51,7 @@
 
         <div ng-repeat="item in bookLists">
             <div style="width: 270px;" ng-class="{true: 'panel panel-info',false: 'panel panel-danger'}[item.Number!=0]">
-                <div class="panel-heading" style="color: #333;cursor: pointer;">
+                <div class="panel-heading" style="color: #333;cursor: pointer;" ng-click="toBookInfo(item.Book.Id);">
                     {{item.Book.Name}} <span class="text-danger pull-right" ng-show="item.Number==0">借完啦</span><span class="text-primary pull-right" ng-show="item.Number!=0">剩余:{{item.Number}}/{{item.Book.Amount}}</span>
                 </div>
                 <div class="panel-body">

@@ -136,4 +136,9 @@
     margin-left: auto;
     margin-right: auto;
 }
+#bookInfo>div>span{
+    display: inline-block;
+    width: 70px;
+    text-align: right;
+}
 

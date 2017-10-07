@@ -83,7 +83,7 @@
 
         }])
 
-        .controller('bookController' ,['$scope' , 'bookService' , 'partService' , '$location' ,function($scope ,bookService ,partService ,$location){
+        .controller('bookController' ,['$scope' , 'bookService' , 'partService' , '$location' , '$route' ,function($scope ,bookService ,partService ,$location ,$route){
 
             $scope.title = '图书';
             $scope.bookCates = [];
@@ -188,6 +188,10 @@
                 });
             };
 
+            $scope.toBookInfo = function(bookId){
+                $location.path('/bookInfo/' + bookId);
+            };
+
             $scope.showModal = function(bookId){
                 $scope.isShowModal = true;
                 console.log(bookId);
@@ -211,7 +215,7 @@
             });*/
 
             $scope.uploadModal = function(){
-                console.log('dia');
+                //console.log('dia');
                 $scope.bookItem = {
                     bookId : $scope.importBook.Book.Id,
                     count : $scope.bookCount,
@@ -226,8 +230,9 @@
                 formData.append('libraryId' ,$scope.bookItem.libraryId);
 
                 bookService.putaway(formData).then(function(response){
-                    console.log(response);
-                    $location.path('/book');
+                    //console.log(response);
+                    //$location.path('/book');
+                    $route.reload();
                 });
 
             };
@@ -236,6 +241,19 @@
                 $location.path('/editBook/' + id);
             };
 
+
+
+        }])
+
+        .controller('bookInfoController' ,['$scope' ,'bookService' ,'$location' , '$routeParams' ,function($scope ,bookService ,$location ,$routeParams){
+            $scope.title = '详情';
+
+            $scope.bookData = {};
+
+            bookService.getBookSingle({id:$routeParams.itemId}).then(function(response){
+                console.log(response);
+                $scope.bookData = response.data.Data;
+            });
 
 
         }])
@@ -312,7 +330,9 @@
 
         }])
 
-        .controller('editBookController' ,['$scope' , 'bookService' ,'$location' , '$routeParams' ,function($scope ,bookService ,$location ,$routeParams){
+        .controller('editBookController' ,['$scope' , 'bookService' , 'authorService' ,'$location' , '$routeParams' ,function($scope ,bookService ,authorService ,$location ,$routeParams){
+
+            $scope.title = '编辑';
 
             $scope.isbn = '';
             $scope.name = '';
@@ -321,7 +341,20 @@
             $scope.publisherId = '';
             $scope.authorId = '';
             $scope.introduce = '';
-            $scope.categoryLists = {};
+            $scope.image = '';
+            $scope.categoryLists = [];
+            $scope.publisherLists = [];
+            $scope.authorLists = [];
+
+            var reader = new FileReader();
+
+            $('#eFileIpt').change(function(){
+                //console.log('123');
+                reader.readAsDataURL($('#eFileIpt')[0].files[0]);
+                reader.onload = function(e){
+                    $('#eFileImg').attr('src' , e.target.result);
+                };
+            });
 
             bookService.getBookSingle({id:$routeParams.itemId}).then(function(response){
                 console.log(response);
@@ -333,12 +366,24 @@
                 $scope.publisherId = books.Book.Publisher.Id;
                 $scope.authorId = books.Book.Author.Id;
                 $scope.introduce = books.Book.Introduce;
+                $scope.image = books.Book.Image;
 
 
             });
 
             bookService.cateLists().then(function(response){
+                //console.log(response);
+                $scope.categoryLists = response.data.Data;
+            });
+
+            bookService.getPublisher().then(function(response){
+                //console.log(response);
+                $scope.publisherLists = response.data.Data;
+            });
+
+            authorService.lists().then(function(response){
                 console.log(response);
+                $scope.authorLists = response.data.Data;
             });
 
             $scope.upload = function(){
@@ -351,8 +396,10 @@
                 formData.append('publisherId' ,$scope.publisherId);
                 formData.append('authorId' ,$scope.authorId);
                 formData.append('introduce' ,$scope.introduce);
+                formData.append('image' ,$('#eFileIpt')[0].files[0]);
                 bookService.editBook(formData).then(function(response){
                     console.log(response);
+                    $location.path('/book');
                 });
             };
 
