@@ -4,11 +4,13 @@
 (function(){
     angular.module('app.service' ,[])
         .constant('ROOTURL' ,'http://101.200.58.3/librarywebapi/')
+
         .service('homeService' ,['$http' ,function($http){
             this.lists = function(){
                 return $http.get();
             }
         }])
+
         .service('partService' ,['$http' , 'ROOTURL' ,function($http ,ROOTURL){
             this.lists = function(data){
                 return $http({
@@ -38,6 +40,7 @@
                 });
             };
         }])
+
         .service('readerService' ,['$http' , 'ROOTURL' ,function($http ,ROOTURL){
 
             this.lists = function(data){
@@ -68,6 +71,7 @@
                 });
             };
         }])
+
         .service('bookService' ,['$http' , 'ROOTURL' ,function($http ,ROOTURL){
             this.cateLists = function(){
                 return $http.get(ROOTURL + 'category/list');
@@ -123,11 +127,13 @@
                 });
             };
         }])
-        .service('orderService' ,['$http' ,function($http){
+
+        .service('orderService' ,['$http' , 'ROOTURL' ,function($http ,ROOTURL){
             this.lists = function(){
-                return $http.get();
+                return $http.get(ROOTURL + 'BorrowRecord/list');
             }
         }])
+
         .service('authorService' ,['$http' , 'ROOTURL' ,function($http ,ROOTURL){
             this.lists = function(){
                 return $http({

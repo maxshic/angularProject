@@ -79,8 +79,6 @@
                     //$scope.temp = Array.from($scope.readerLists);
                 });
             };
-
-
         }])
 
         .controller('bookController' ,['$scope' , 'bookService' , 'partService' , '$location' , '$route' ,function($scope ,bookService ,partService ,$location ,$route){
@@ -410,6 +408,11 @@
         .controller('orderController' ,['$scope' , 'orderService' ,function($scope ,orderService){
 
             $scope.title = '订单';
+            $scope.orderLists = [];
+
+            orderService.lists().then(function(response){
+                console.log(response);
+            });
 
         }])
 
